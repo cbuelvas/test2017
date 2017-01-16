@@ -1,0 +1,51 @@
+---
+- hosts: web
+  vars_files:
+    - vars.yml
+  gather_facts: false
+  become: yes
+  user: ubuntu
+
+  tasks:
+    - name: Copy Database from local
+      copy: src=files/db_test2017.sql dest=/tmp/{{ project_name }}.sql
+
+    - name: Create Database on server
+      mysql_db: name=test2017 state=present login_user='root' login_password={{MySQL_root_pass}}
+
+    - name: Import Database for the proyect
+      mysql_db: db=test2017 state=import login_password="{{ MySQL_root_pass }}" login_user=root target=/tmp/test2017.sql
+   
+    - name: Create directory for app
+      file: path={{ install_root }}/{{ project_name }} state=directory
+
+    - name: Clone/pull project repo
+      git: repo={{ project_repo }} dest={{ install_root }}/{{ project_name }}
+
+    - name: install python packages
+      pip: requirements={{ install_root }}/{{ project_name }}/requirements.txt virtualenv={{ install_root }}/venv
+
+    - name: copy nginx config
+      template: src=files/default.conf dest=/etc/nginx/conf.d/default.conf
+      notify:
+      - restart nginx
+
+    - name: Copy supervisor project config file
+      copy: src=~/Documents/ansible/files/test2017.conf dest=/etc/supervisor/conf.d/supervisor.conf
+
+    - name: Supervisor reread 
+      command: supervisorctl reread
+
+    - name: Supervisor update
+      command: supervisorctl update
+
+    - name: Reload supervisor 
+      command: supervisorctl start test2017
+
+    - name: make sure nginx server is running
+      service: name=nginx state=started enabled=yes
+
+  handlers: 
+    - name: restart nginx
+      service: name=nginx state=restarted
+

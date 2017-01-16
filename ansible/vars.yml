@@ -1,0 +1,17 @@
+---
+
+project_name: test2017 
+install_root: /home/ubuntu 
+project_repo: https://github.com/cbuelvas/test2017.git 
+MySQL_root_pass: root 
+system_packages:
+  - git
+  - nginx
+  - gunicorn
+  - python-pip
+  - python-dev
+  - python-virtualenv
+  - python-setuptools
+  - supervisor
+
+
