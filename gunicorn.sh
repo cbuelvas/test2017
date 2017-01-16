@@ -14,7 +14,7 @@ RUNDIR=$(dirname $SOCKFILE)
 test -d $RUNDIR || mkdir -p $RUNDIR
  
 # Start your gunicorn
-exec gunicorn app:app -b 127.0.0.1:5005 \
+exec /home/ubuntu/venv/bin/gunicorn app:app -b 127.0.0.1:5005 \
   --name $NAME \
   --workers $NUM_WORKERS \
   --user=$USER --group=$GROUP \
