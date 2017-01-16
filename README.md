@@ -36,7 +36,9 @@ CREATE TABLE `your_db_name_here`.`tbl_user` (
   `user_pet` VARCHAR(45) NULL,
   PRIMARY KEY (`user_id`));
 ```
+
 To create the stored Procedure:
+
 ```
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createData`(
