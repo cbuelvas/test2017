@@ -12,6 +12,6 @@ system_packages:
   - python-dev
   - python-virtualenv
   - python-setuptools
-  - supervisor
+
 
 
