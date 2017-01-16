@@ -12,19 +12,16 @@ and have already set up ssh public key authentication on it.
 - Install ansible on your computer (`sudo pip install ansible`).
 - Clone this repo and move in to the ansible folder, edit the host file with your data
 - edit the file vars.yml to include your settings
-- Run the playbook:
+- Run the playbook: cd ansible
 
-        ```
-	cd ansible
-	ansible-playbook -i hosts provision.yml
-	```
+	`ansible-playbook -i hosts provision.yml`
 
 ### MySQL DB
 
 This projec uses a simple mysql database, it contain just one table and a stored procedure.
 To create the DB we move in `mysql cli` and excecute the commands:
 
-`CREATE DATABASE "your_db_name_here" ;`
+`CREATE DATABASE "your_db_name_here";`
 
 To create the user table:
 
