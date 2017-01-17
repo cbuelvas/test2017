@@ -2,9 +2,9 @@
  
 NAME="Test2017"
 FLASKDIR=/home/ubuntu/test2017
-SOCKFILE=/home/ubuntu/test2017/sock
-USER=root
-GROUP=root
+SOCKFILE=/home/ubuntu/test2017/app.sock
+USER=www-data
+GROUP=www-data
 NUM_WORKERS=3
  
 echo "Starting $NAME"
